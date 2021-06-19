@@ -1,0 +1,1 @@
+define(["jquery"],function(i){var n=i(".sidenav").find("ul");n.find("li").find(".submenuIndicator").click(function(){i(this).hasClass("plusIndicator")&&n.find(".minusIndicator").toggleClass("plusIndicator minusIndicator").next("ul").slideToggle("fast"),i(this).toggleClass("plusIndicator minusIndicator"),i(this).next("ul").slideToggle("slow")})});

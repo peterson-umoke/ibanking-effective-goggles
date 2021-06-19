@@ -1,0 +1,1 @@
+define([],function(){document.addEventListener("touchstart",function t(e){document.documentElement.className+=" can-touch",document.removeEventListener("touchstart",t,!1)},!1)});

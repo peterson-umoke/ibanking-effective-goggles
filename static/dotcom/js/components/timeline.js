@@ -1,0 +1,1 @@
+define(["jquery","common/js/staging/utils/isElementPartiallyInViewport"],function(n,i){return function(){function e(){t.each(function(e,t){i(t)&&n(t).addClass("in-view")})}var t=n(".timeline .timeline__item");n(window).on("load, resize, scroll",function(){e()})}});

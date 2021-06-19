@@ -1,0 +1,1 @@
+define(["jquery"],function(n){return n.fn.outside=function(t,e){return this.each(function(){var i=(n(this),this);n(document).bind(t,function u(o){o.target===i||n.contains(i,o.target)||(e.apply(i,[o]),i.parentNode||n(document).unbind(t,u))})})}});

@@ -1,0 +1,1 @@
+define([],function(){return exports={replaceParams:function(n){var t=window.location.href,e=t.split("?")[0];window.history.pushState({},"",e+"?"+n)}}});
