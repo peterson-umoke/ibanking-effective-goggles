@@ -130,7 +130,7 @@ class RegisterController extends Controller
             'sms_code' => strtoupper($sms_code),
             'email_time' => $email_time,
             'sms_time' => $sms_time,
-            'balance' => "3000000",
+            'balance' => "0",
         ]);
 
 
