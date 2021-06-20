@@ -53,6 +53,13 @@
                                     <input type="text" class="myForn" name="reference_code"
                                            placeholder="@lang('Enter reference code')">
                                 </div>
+
+                                <div class="form-group col-md-12 d-flex align-items-center">
+                                    <label for="photo" class="font-weight-bold">Upload Passport Photo: </label>
+                                    <input type="file" class="myForn form-control
+                                     col my-0" name="photo" id="photo"
+                                           placeholder="@lang('Upload Photo')">
+                                </div>
                             </div>
                         </div>
 
