@@ -12,7 +12,7 @@
                                                                          title="Ajakirjandus ja uudised"
                                                                          data-wa-component="leftmenu">Dashboard</a>
                     </h1>
-                    <div class="block top-story__block span-6-desk span-5">
+                    <div class="block top-story__block span-6-desk span-5" style="padding-top: 0px;">
                         <div data-compid="33-24159" data-wa-template="Article Strict [C2]"
                              data-wa-component="Article, strict">
                             <div class="clear--both parapgraph-wrapper article--strict">
@@ -21,9 +21,9 @@
                                                :value='sprintf("#%s",Auth::user()->account_number)'/>
                                 <x-jet-heading title="Account Balance"
                                                :value="sprintf('%s%s',$gnl->cur_symbol, number_format(Auth::user()->balance,2))"/>
-                                @isset(auth()->user()->reference_code)
+                                @empty(!auth()->user()->reference_code)
                                     <x-jet-heading title="Reference Code" :value="auth()->user()->reference_code"/>
-                                @endisset
+                                @endempty
                             </div>
                         </div>
                     </div>

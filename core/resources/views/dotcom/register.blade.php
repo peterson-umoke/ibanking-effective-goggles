@@ -8,7 +8,7 @@
         </header><!-- /*End of E area*/ -->
         <section class="grid-group">
             <article class="grid span-24 span-24--portable span-16--desk-wide landmark" data-wa-region="C">
-                <form method="post" action="{{route('register')}}">
+                <form method="post" action="{{route('register')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">

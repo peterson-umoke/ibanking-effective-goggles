@@ -6,7 +6,10 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -73,6 +76,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:199', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'reference' => ['nullable'],
+            'photo' => ['nullable'],
         ]);
     }
 
@@ -80,11 +84,10 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return User|\App\User|\Illuminate\Database\Eloquent\Model
+     * @return Model|User
      */
     protected function create(array $data)
     {
-
         $settings = Setting::first();
         $email_verify = ($settings->email_verification == 1) ? 0 : 1;
         $sms_verify = ($settings->sms_verification == 1) ? 0 : 1;
@@ -92,9 +95,14 @@ class RegisterController extends Controller
         $sms_code = substr(uniqid(), 3, 6);
         $email_time = Carbon::parse()->addMinute(3);
         $sms_time = Carbon::parse()->addMinute(3);
-
-
         $account_number = $this->generateAccNo();
+
+        $photo = $data['photo'] ?? null;
+        if (!empty($photo)):
+            /** @var UploadedFile $photo */
+            $filepathPhoto = $photo->storePublicly('registrations');
+            $data['photo'] = $filepathPhoto;
+        endif;
 
 
         if ($settings->email_verification == 1) {
@@ -138,17 +146,18 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-
-
         return redirect()->route('user.verify');
     }
 
+    /**
+     * @throws Exception
+     */
     public function generateAccNo()
     {
-        $rend = rand(10000000, 99999999) . rand(10000000, 99999999);
+        $rend = random_int(10000000, 99999999) . random_int(10000000, 99999999);
         $check = User::where('account_number', $rend)->first();
 
-        if ($check == true) {
+        if ($check === true) {
             $rend = $this->generateAccNo();
         }
         return $rend;
