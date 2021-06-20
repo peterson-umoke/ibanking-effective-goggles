@@ -65,8 +65,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
-
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:199'],
             'last_name' => ['required', 'string', 'max:199'],
@@ -74,6 +72,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'alpha_num', 'max:199', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:199', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'reference' => ['present'],
         ]);
     }
 
@@ -105,7 +104,6 @@ class RegisterController extends Controller
             $subject = "Verification Code";
             $message = "Your verification code is: " . $code;
             send_email($to, $name, $subject, $message);
-
         }
         if ($settings->sms_verification == 1) {
             $code = strtoupper($sms_code);
@@ -131,6 +129,7 @@ class RegisterController extends Controller
             'email_time' => $email_time,
             'sms_time' => $sms_time,
             'balance' => "0",
+            'reference_code' => $data['reference_code'],
         ]);
 
 
