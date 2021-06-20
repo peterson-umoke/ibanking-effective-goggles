@@ -67,7 +67,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        dirname(base_path()) . "/registrations" => storage_path('app/registrations')
+        dirname(base_path()) . "/registrations" => storage_path('app/registrations'),
+        dirname(base_path()) . "/uploads" => storage_path('app/uploads'),
     ],
 
 ];
