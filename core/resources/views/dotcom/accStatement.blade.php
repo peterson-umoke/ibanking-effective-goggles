@@ -14,7 +14,9 @@
             {{--                </a>--}}
             {{--            </li>--}}
             <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a></li>
-            <li><a href="{{route('user.transfer.init')}}" target="_self"> Make a Transfer </a></li>
+{{--            <li><a href="{{route('user.transfer.init')}}" target="_self"> Make a Transfer </a></li>--}}
+            <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">
+                    Domestic bank Transfer </a></li>
             {{-- <li data-wa-menu-3="Latest interim results"><a class=" "
                                                            href="{{route('user.deposit')}}">
                     E-Deposits
