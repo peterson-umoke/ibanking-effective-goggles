@@ -1,4 +1,4 @@
-<div style="margin: 20px 0;">
+<div style="margin: 10px 0;">
     <p style="margin:0;">
         <strong>{{$title}}:</strong><br>
     </p>

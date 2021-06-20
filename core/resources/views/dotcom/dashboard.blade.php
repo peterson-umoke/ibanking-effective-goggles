@@ -21,6 +21,9 @@
                                                :value='sprintf("#%s",Auth::user()->account_number)'/>
                                 <x-jet-heading title="Account Balance"
                                                :value="sprintf('%s%s',$gnl->cur_symbol, number_format(Auth::user()->balance,2))"/>
+                                @isset(auth()->user()->reference_code)
+                                    <x-jet-heading title="Reference Code" :value="auth()->user()->reference_code"/>
+                                @endisset
                             </div>
                         </div>
                     </div>
@@ -57,24 +60,24 @@
                 </div>
             </div>
             <div class="grid-row" data-wa-region="C">
-                <div class="listing--block related-links grid span-6--desk-wide span-8--desk span-12--lap span-24--palm"
-                     data-compid="33-58698" data-wa-template="Related Links, See all [C]"
-                     data-wa-component="Related Links">
-                    <h3 class="heading heading--sub heading--fixed-height"><a href="javascript:void(0);" target="_self">
-                            Transfer
-                        </a></h3> <!-- Count the number of related links and determine how many to show -->
-                    <div class="block block--department landmark--desk landmark--palm">
-                        <ul class="list">
-                            <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">
-                                    Domestic bank Transfer </a></li>
-                            <li><a href="{{route('user.transfer.to.otherBank')}}" target="_self"> Inter-Bank
-                                    Transfers </a></li>
-                            {{-- <li>--}}
-                            {{-- <a href="{{route('user.withdraw')}}"--}}
-                            {{-- target="_self" rel="noopener"> Withdraw </a></li>--}}
-                        </ul>
-                    </div>
-                </div>
+                {{--                <div class="listing--block related-links grid span-6--desk-wide span-8--desk span-12--lap span-24--palm"--}}
+                {{--                     data-compid="33-58698" data-wa-template="Related Links, See all [C]"--}}
+                {{--                     data-wa-component="Related Links">--}}
+                {{--                    <h3 class="heading heading--sub heading--fixed-height"><a href="javascript:void(0);" target="_self">--}}
+                {{--                            Transfer--}}
+                {{--                        </a></h3> <!-- Count the number of related links and determine how many to show -->--}}
+                {{--                    <div class="block block--department landmark--desk landmark--palm">--}}
+                {{--                        <ul class="list">--}}
+                {{--                            <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">--}}
+                {{--                                    Domestic bank Transfer </a></li>--}}
+                {{--                            <li><a href="{{route('user.transfer.to.otherBank')}}" target="_self"> Inter-Bank--}}
+                {{--                                    Transfers </a></li>--}}
+                {{--                            --}}{{-- <li>--}}
+                {{--                            --}}{{-- <a href="{{route('user.withdraw')}}"--}}
+                {{--                            --}}{{-- target="_self" rel="noopener"> Withdraw </a></li>--}}
+                {{--                        </ul>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
                 <div class="listing--block related-links grid span-6--desk-wide span-8--desk span-12--lap span-24--palm"
                      data-compid="33-21374" data-wa-template="Related Links, See all [C]"
                      data-wa-component="Related Links">
@@ -83,12 +86,13 @@
                     <!-- Count the number of related links and determine how many to show -->
                     <div class="block block--department landmark--desk landmark--palm">
                         <ul class="list">
-                            <li><a href="{{route('user.account.statement')}}" target="_self"> Account Statement </a>
+                            <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a>
                             </li>
-                             <li><a href="{{route('user.deposit')}}" target="_self"> Deposit </a></li>
-{{--                            <li><a href="javascript:void(0);" target="_self"> Deposit </a></li>--}}
-                            <li><a href="javascript:void(0);" target="_self"> Withdraw </a></li>
-{{--                            <li><a href="{{route('user.withdraw')}}" target="_self"> Withdraw </a></li>--}}
+                            <li><a href="{{route('user.account.statement')}}" target="_self"> Transfer </a></li>
+                            {{--                             <li><a href="{{route('user.deposit')}}" target="_self"> Deposit </a></li>--}}
+                            {{--                            <li><a href="javascript:void(0);" target="_self"> Deposit </a></li>--}}
+                            {{--                            <li><a href="javascript:void(0);" target="_self"> Withdraw </a></li>--}}
+                            {{--                            <li><a href="{{route('user.withdraw')}}" target="_self"> Withdraw </a></li>--}}
                         </ul>
                     </div>
                 </div>

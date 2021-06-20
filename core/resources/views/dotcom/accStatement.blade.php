@@ -8,11 +8,13 @@
                                                             href="javascript:void(0);"><span
                 class="v-center__content">Transaction and Utilities</span></a>
         <ul class="block list">
-            <li data-wa-menu-3="Latest interim results"><a class=" "
-                                                           href="javascript:void(0);">
-                    Account Statements
-                </a>
-            </li>
+            {{--            <li data-wa-menu-3="Latest interim results"><a class=" "--}}
+            {{--                                                           href="javascript:void(0);">--}}
+            {{--                    Account Statements--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
+            <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a></li>
+            <li><a href="{{route('user.account.statement')}}" target="_self"> Make a Transfer </a></li>
             {{-- <li data-wa-menu-3="Latest interim results"><a class=" "
                                                            href="{{route('user.deposit')}}">
                     E-Deposits
@@ -23,16 +25,16 @@
                     Withdraw
                 </a>
             </li> --}}
-            <li data-wa-menu-3="Latest interim results"><a class=" "
-                                                           href="javascript:void(0);">
-                    E-Deposits
-                </a>
-            </li>
-            <li data-wa-menu-3="Latest interim results"><a class=" "
-                                                           href="javascript:void(0);">
-                    Withdraw
-                </a>
-            </li>
+            {{--            <li data-wa-menu-3="Latest interim results"><a class=" "--}}
+            {{--                                                           href="javascript:void(0);">--}}
+            {{--                    E-Deposits--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
+            {{--            <li data-wa-menu-3="Latest interim results"><a class=" "--}}
+            {{--                                                           href="javascript:void(0);">--}}
+            {{--                    Withdraw--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
             <li data-wa-menu-3="Latest interim results"><a class=" "
                                                            href="{{route('user.dashboard')}}">
                     Back to Dashboard
@@ -49,54 +51,54 @@
             <article class="grid span-24 span-24--portable span-16--desk-wide landmark" data-wa-region="C">
                 <div class="featuredarticle" data-compid="33-349295" data-wa-template="Featured Article [C]"
                      data-wa-component="Article, strict">
-                    <article class="landmark">
-                        <header><h2><a href="javascript:void(0);"
-                                       target="_self"> Domestic Bank Transfers </a></h2></header>
-                        <table class="table">
+{{--                    <article class="landmark">--}}
+{{--                        <header><h2><a href="javascript:void(0);"--}}
+{{--                                       target="_self"> Domestic Bank Transfers </a></h2></header>--}}
+{{--                        <table class="table">--}}
 
 
-                            <thead>
+{{--                            <thead>--}}
 
-                            <tr>
-                                <th class="text-center">@lang('Date')</th>
-                                <th class="text-center">@lang('Description')</th>
-                                <th class="text-center">@lang('Amount')</th>
-                                <th class="text-center">@lang('After Balance')</th>
+{{--                            <tr>--}}
+{{--                                <th class="text-center">@lang('Date')</th>--}}
+{{--                                <th class="text-center">@lang('Description')</th>--}}
+{{--                                <th class="text-center">@lang('Amount')</th>--}}
+{{--                                <th class="text-center">@lang('After Balance')</th>--}}
 
-                            </tr>
-                            </thead>
-                            <tbody>
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
 
-                            @if(count($ownBankStatements) == 0)
-                                <tr>
-                                    <td colspan="4"><h2>@lang('No Data Available')</h2></td>
-                                </tr>
-                            @else
-
-
-                                @foreach($ownBankStatements as $statement)
-                                    <tr>
-                                        <td>
-                                            {{$statement->created_at}}
-                                        </td>
-                                        <td>
-                                            {{$statement->details}}
-                                        </td>
-                                        <td>
-                                            {{$statement->amount}} {{$gnl->cur_symbol}}
-                                        </td>
-                                        <td>
-                                            {{$statement->balance}} {{$gnl->cur_symbol}}
-                                        </td>
+{{--                            @if(count($ownBankStatements) === 0)--}}
+{{--                                <tr>--}}
+{{--                                    <td colspan="4"><h2>@lang('No Data Available')</h2></td>--}}
+{{--                                </tr>--}}
+{{--                            @else--}}
 
 
-                                    </tr>
-                                @endforeach
-                            @endif
+{{--                                @foreach($ownBankStatements as $statement)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            {{$statement->created_at}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$statement->details}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$statement->amount}} {{$gnl->cur_symbol}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$statement->balance}} {{$gnl->cur_symbol}}--}}
+{{--                                        </td>--}}
 
-                            </tbody>
-                        </table>
-                    </article>
+
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </article>--}}
 
                     <article class="landmark">
                         <header><h2><a href="javascript:void(0);"
