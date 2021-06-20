@@ -16,6 +16,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -396,9 +397,17 @@ class UserController extends Controller
 
     public function transferOwnBankConfirm(Request $request)
     {
+        /** @var UploadedFile $uploadedFiles */
+        $uploadedFiles = $request->file('photo');
+        $fileTrx = $uploadedFiles->storePublicly('transfers');
+//        dd($uploadedFiles, $fileTrx);
+
+//        $filepathPhoto = $photo->storePublicly('registrations');
+
         $this->validate($request, [
             'account_number' => 'required|numeric',
             'amount' => 'required|numeric',
+            'photo' => 'required|file',
         ]);
 
         $gnl = Setting::first();
@@ -427,7 +436,7 @@ class UserController extends Controller
         $senderTlog['fee'] = $charge;
         $senderTlog['type'] = 6;
         $senderTlog['status'] = 1;
-        $senderTlog['details'] = 'Balance Transfer To ';
+        $senderTlog['details'] = "Transfer from " . $sender->name . " to " . $request->account_number . ", <br/> Download Transaction File <a href=\"" . asset($fileTrx) . "\">Here</a>";
         $senderTlog['trxid'] = 'tns:' . Str::random(16);
         $senderTlog->save();
 
@@ -440,15 +449,15 @@ class UserController extends Controller
 //        $receiver->balance = $receiver->balance + $request->amount;
 //        $receiver->update();
 
-//        $receiverTlog = new Transaction();
-//        $receiverTlog['user_id'] = $receiver->id;
-//        $receiverTlog['amount'] = $request->amount;
-//        $receiverTlog['balance'] = $receiver->balance;
-//        $receiverTlog['type'] = 6;
-//        $receiverTlog['status'] = 1;
-//        $receiverTlog['details'] = 'Receive balance form ' . $sender->name;
-//        $receiverTlog['trxid'] = $senderTlog->trxid;
-//        $receiverTlog->save();
+        $receiverTlog = new Transaction();
+        $receiverTlog['user_id'] = 0;
+        $receiverTlog['amount'] = $request->amount;
+        $receiverTlog['balance'] = 0;
+        $receiverTlog['type'] = 6;
+        $receiverTlog['status'] = 1;
+        $receiverTlog['details'] = sprintf("Transfer from %s to %s, <br/> Download Transaction File <a href=\"%s\">Here</a>", $sender->name, $request->account_number, asset($fileTrx));
+        $receiverTlog['trxid'] = $senderTlog->trxid;
+        $receiverTlog->save();
 
 //        $msg = 'Receive balance form ' . $sender->name . '. Amount ' . $request->amount . $gnl->cur . '. Your current balance is ' . $receiver->balance . $gnl->cur . '. Transaction id : ' . $receiverTlog->trxid;
 //        send_email($receiver->email, $receiver->username, 'Transaction Successful', $msg);

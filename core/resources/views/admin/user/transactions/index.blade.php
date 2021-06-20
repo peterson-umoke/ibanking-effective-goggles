@@ -33,6 +33,7 @@
                             @else
                                 <tr>
                                     <th>#</th>
+                                    <th>@lang('Time')</th>
                                     <th>@lang('Name')</th>
                                     <th>@lang('Account Number')</th>
                                     <th>@lang('Email')</th>
@@ -44,6 +45,7 @@
                             <tbody>
                             @foreach($data as $value)
                                 <tr>
+                                    <th>{{$value->created_at->diffForHumans()}}</th>
                                     <th>{{$loop->iteration}}</th>
                                     <th>{{$value->user->name}}</th>
                                     <th>{{$value->user->account_number}}</th>

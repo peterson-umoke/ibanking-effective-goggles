@@ -29,11 +29,10 @@
                 <div class="col-md-12 col-lg-10">
                     <div class="box">
 
-                        <form method="post" action="{{route('user.transfer.ownbank.confirm')}}">
+                        <form method="post" action="{{route('user.transfer.ownbank.confirm')}}"
+                              enctype="multipart/form-data">
                             @csrf
 
-                            <input type="hidden" name="account_number" value="{{$tnfp['account_number']}}">
-                            <input type="hidden" name="amount" value="{{$tnfp['amount']}}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-row">
@@ -69,7 +68,8 @@
                                 </div>
 
                                 <div class="row">
-
+                                    <input type="hidden" name="account_number" value="{{$tnfp['account_number']}}">
+                                    <input type="hidden" name="amount" value="{{$tnfp['amount']}}">
                                 </div>
 
                                 <div class="form-group padding-top-10 col-md-12">

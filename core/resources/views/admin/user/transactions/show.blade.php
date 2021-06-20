@@ -15,7 +15,7 @@
                     {{Form::model($trax,['route' => ['admin.users.transaction-history.store',$user->id],'method' => 'post','class' => 'form-horizontal form-bordered'])}}
 
                     <div class="row">
-                        @include('admin.user.transactions.fields')
+                        @include('admin.user.transactions.show_fields')
                     </div>
 
                     <div class="tile-footer">

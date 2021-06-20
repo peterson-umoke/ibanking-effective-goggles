@@ -17,7 +17,7 @@ class UserTransactionHistoryController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
-        $data = $user->transactions()->paginate();
+        $data = $user->transactions()->orderByDesc('created_at')->paginate();
         $title = "All Transactions History";
 
         return view("admin.user.transactions.index", compact('user', 'data', 'title'));

@@ -21,7 +21,9 @@
 
 <div class="form-group col-12">
     {!! Form::label('details', __(ucwords('details')).':',['class' => 'col-form-label font-weight-bold']) !!}
-    {!! Form::textarea('details', null, ['class' => 'form-control form-control-lg']) !!}
+    <div class="form-control">
+        {!! $trax->details !!}
+    </div>
 </div>
 
 <div class="form-group col">
