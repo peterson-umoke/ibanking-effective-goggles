@@ -48,6 +48,11 @@
                                     <input type="password" class="myForn" name="password_confirmation"
                                            placeholder="@lang('Confirm Password')" required>
                                 </div>
+
+                                <div class="form-group col-md-12">
+                                    <input type="text" class="myForn" name="reference_code"
+                                           placeholder="@lang('Enter reference code')">
+                                </div>
                             </div>
                         </div>
 

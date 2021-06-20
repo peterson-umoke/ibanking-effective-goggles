@@ -133,6 +133,10 @@
                                 <label for="exampleInputEmail1">@lang('Mobile')</label>
                                 <input class="form-control" type="text" name="phone" value="{{$data->phone}}">
                             </div>
+                            <div class="form-group col-md-12">
+                                <label for="exampleInputEmail1">@lang('Reference Code')</label>
+                                <input class="form-control" type="text" name="reference_code" value="{{$data->reference_code}}">
+                            </div>
                         </div>
 
 
