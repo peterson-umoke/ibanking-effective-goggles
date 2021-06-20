@@ -167,7 +167,7 @@
 {{--                                <th class="text-center">@lang('Fee')</th>--}}
 {{--                                <th class="text-center">@lang('Tranx Id')</th>--}}
 {{--                                <th class="text-center">@lang('Details')</th>--}}
-{{--                                <th class="text-center">@lang('Account info')</th>--}}
+                                <th class="text-center">@lang('Account info')</th>
 {{--                                <th class="text-center">@lang('Processing time')</th>--}}
 {{--                                <th class="text-center">@lang('Status')</th>--}}
                             </tr>
@@ -196,9 +196,9 @@
                                         <td>
                                             {{$data->balance}} {{$gnl->cur_symbol}}
                                         </td>
-{{--                                        <td>--}}
-{{--                                            {{$data->details}}--}}
-{{--                                        </td>--}}
+                                        <td>
+                                            {{$data->details}}
+                                        </td>
 
 {{--                                        <td>--}}
 {{--                                            {{$data->p_time}}--}}

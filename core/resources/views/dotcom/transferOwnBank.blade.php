@@ -4,9 +4,14 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/toastr.min.css')}}">
 <nav class="sidenav js-sticky grid span-24 span-6--desk-wide span-7--desk no-print is-hidden-palm is-hidden-lap" data-wa-region="B" data-wa-component="leftmenu"><a class="block block--secondary block--header v-center" href="javascript:void(0);"><span class="v-center__content">Transfer</span></a>
     <ul class="block list">
+{{--        <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">--}}
+{{--                Domestic bank Transfer </a></li>--}}
+{{--        <li><a href="{{route('user.transfer.to.otherBank')}}" target="_self"> Inter-Bank Transfers </a></li>--}}
+        <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a>
+        </li>
+        {{--                            <li><a href="{{route('user.transfer.init')}}" target="_self"> Transfer </a></li>--}}
         <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">
                 Domestic bank Transfer </a></li>
-        <li><a href="{{route('user.transfer.to.otherBank')}}" target="_self"> Inter-Bank Transfers </a></li>
         <li data-wa-menu-3="Latest interim results"><a class=" " href="{{route('user.dashboard')}}">
                 Back to Dashboard
             </a>

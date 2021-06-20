@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserTransferController extends Controller
 {
@@ -17,6 +18,11 @@ class UserTransferController extends Controller
         }
 
         return view('dotcom.makeTransfer');
+
+    }
+
+    public function store(Request $request)
+    {
 
     }
 }

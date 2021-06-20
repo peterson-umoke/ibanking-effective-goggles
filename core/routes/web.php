@@ -265,6 +265,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'as' => 'user.'], func
 
             Route::get('/account/statement', 'UserController@accStatement')->name('account.statement');
             Route::get('/make-transfer', 'UserTransferController@index')->name('transfer.init');
+            Route::post('/make-transfer', 'UserTransferController@store')->name('transfer.init.store');
 
             Route::get('/transfer/balance', 'UserController@transferToOwnBank')->name('transfer.to.ownbank');
             Route::post('/transfer/balance', 'UserController@transferOwnBank')->name('transfer.ownbank');

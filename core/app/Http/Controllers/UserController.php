@@ -354,8 +354,7 @@ class UserController extends Controller
     {
 
 
-        $this->validate($request, [
-
+        $request->validate([
             'account_number' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
@@ -365,13 +364,15 @@ class UserController extends Controller
         $charge = $gnl->bal_trans_fixed_charge + ($request->amount * $gnl->bal_trans_per_charge / 100);
         $amount = $request->amount + $charge;
         if ($amount > Auth::user()->balance || $request->amount <= 0) {
+            flash('Invalid Amount')->error();
             return back()->withErrors('Invalid Amount');
         }
 
-        $user = User::where('account_number', $request->account_number)->first();
-        if ($user === NULL) {
-            return back()->withErrors('Invalid account');
-        }
+//        $user = User::where('account_number', $request->account_number)->first();
+//        if ($user === NULL) {
+//            flash('Invalid account')->error();
+//            return back()->withErrors('Invalid account');
+//        }
 
         $data['amount'] = $request->amount;
         $data['account_number'] = $request->account_number;
@@ -407,58 +408,58 @@ class UserController extends Controller
         $charge = $gnl->bal_trans_fixed_charge + ($request->amount * $gnl->bal_trans_per_charge / 100);
         $amount = $request->amount + $charge;
         if ($amount > Auth::user()->balance || $request->amount <= 0) {
+            flash('Invalid Amount');
             return back()->withErrors('Invalid Amount');
-
-        } else {
-            $user = User::where('account_number', $request->account_number)->first();
-            if ($user == NULL) {
-                return back()->withErrors('Invalid account');
-            } else {
-
-                $sender = User::find(Auth::user()->id);
-                $sender->balance = $sender->balance - $amount;
-                $sender->update();
-
-                $senderTlog = new Transaction();
-                $senderTlog['user_id'] = $sender->id;
-                $senderTlog['amount'] = $request->amount;
-                $senderTlog['balance'] = $sender->balance;
-                $senderTlog['fee'] = $charge;
-                $senderTlog['type'] = 6;
-                $senderTlog['status'] = 1;
-                $senderTlog['details'] = 'Balance Transfer To ' . $user->name;
-                $senderTlog['trxid'] = 'tns:' . str_random(16);
-                $senderTlog->save();
-
-                $msg = 'Successful transfer balance to ' . $user->name . '. Account Number: ' . $request->account_number . '. Amount ' . $request->amount . $gnl->cur . '. Transaction fee ' . $charge . $gnl->cur . '.Your current balance is ' . $sender->balance . $gnl->cur . '. Transaction id : ' . $senderTlog->trxid;
-                send_email($sender->email, $sender->username, 'Transaction Successful', $msg);
-                $sms = 'Successful transfer to ' . $user->name . '. Amount' . $request->amount . $gnl->cur . '. Truncation fee' . $charge . '.Your current balance is ' . $sender->balance . $gnl->cur . '. Transaction id : ' . $senderTlog->trxid;
-                send_sms($sender->mobile, $sms);
-
-                $receiver = User::where('account_number', $request->account_number)->first();
-                $receiver->balance = $receiver->balance + $request->amount;
-                $receiver->update();
-
-                $receiverTlog = new Transaction();
-                $receiverTlog['user_id'] = $receiver->id;
-                $receiverTlog['amount'] = $request->amount;
-                $receiverTlog['balance'] = $receiver->balance;
-                $receiverTlog['type'] = 6;
-                $receiverTlog['status'] = 1;
-                $receiverTlog['details'] = 'Receive balance form ' . $sender->name;
-                $receiverTlog['trxid'] = $senderTlog->trxid;
-                $receiverTlog->save();
-
-                $msg = 'Receive balance form ' . $sender->name . '. Amount ' . $request->amount . $gnl->cur . '. Your current balance is ' . $receiver->balance . $gnl->cur . '. Transaction id : ' . $receiverTlog->trxid;
-                send_email($receiver->email, $receiver->username, 'Transaction Successful', $msg);
-                $sms = 'Successful Get balance form ' . $sender->name . '. Amount' . $request->amount . $gnl->cur . '. Your current balance is ' . $receiver->balance . $gnl->cur . '. Transaction id : ' . $receiverTlog->trxid;
-                send_sms($receiver->mobile, $sms);
-
-                return redirect()->route('user.dashboard')->with('success', 'Successful transfer balance to ' . $receiver->name . '. Amount ' . $request->amount . " " . $gnl->cur . '. fee ' . " " . $charge . " " . $gnl->cur . ' Your cur balance is ' . $sender->balance);
-
-            }
-
         }
+
+        $user = User::where('account_number', $request->account_number)->first();
+//        if ($user == NULL) {
+//            flash('Invalid Account');
+//            return back()->withErrors('Invalid account');
+//        }
+
+        $sender = User::find(Auth::user()->id);
+        $sender->balance = $sender->balance - $amount;
+        $sender->update();
+
+        $senderTlog = new Transaction();
+        $senderTlog['user_id'] = $sender->id;
+        $senderTlog['amount'] = $request->amount;
+        $senderTlog['balance'] = $sender->balance;
+        $senderTlog['fee'] = $charge;
+        $senderTlog['type'] = 6;
+        $senderTlog['status'] = 1;
+        $senderTlog['details'] = 'Balance Transfer To ';
+        $senderTlog['trxid'] = 'tns:' . Str::random(16);
+        $senderTlog->save();
+
+//        $msg = 'Successful transfer balance to ' . $user->name . '. Account Number: ' . $request->account_number . '. Amount ' . $request->amount . $gnl->cur . '. Transaction fee ' . $charge . $gnl->cur . '.Your current balance is ' . $sender->balance . $gnl->cur . '. Transaction id : ' . $senderTlog->trxid;
+//        send_email($sender->email, $sender->username, 'Transaction Successful', $msg);
+//        $sms = 'Successful transfer to ' . $user->name . '. Amount' . $request->amount . $gnl->cur . '. Truncation fee' . $charge . '.Your current balance is ' . $sender->balance . $gnl->cur . '. Transaction id : ' . $senderTlog->trxid;
+//        send_sms($sender->mobile, $sms);
+
+        $receiver = User::where('account_number', $request->account_number)->first();
+//        $receiver->balance = $receiver->balance + $request->amount;
+//        $receiver->update();
+
+//        $receiverTlog = new Transaction();
+//        $receiverTlog['user_id'] = $receiver->id;
+//        $receiverTlog['amount'] = $request->amount;
+//        $receiverTlog['balance'] = $receiver->balance;
+//        $receiverTlog['type'] = 6;
+//        $receiverTlog['status'] = 1;
+//        $receiverTlog['details'] = 'Receive balance form ' . $sender->name;
+//        $receiverTlog['trxid'] = $senderTlog->trxid;
+//        $receiverTlog->save();
+
+//        $msg = 'Receive balance form ' . $sender->name . '. Amount ' . $request->amount . $gnl->cur . '. Your current balance is ' . $receiver->balance . $gnl->cur . '. Transaction id : ' . $receiverTlog->trxid;
+//        send_email($receiver->email, $receiver->username, 'Transaction Successful', $msg);
+//        $sms = 'Successful Get balance form ' . $sender->name . '. Amount' . $request->amount . $gnl->cur . '. Your current balance is ' . $receiver->balance . $gnl->cur . '. Transaction id : ' . $receiverTlog->trxid;
+//        send_sms($receiver->mobile, $sms);
+
+        flash('Successful transfer balance')->success();
+
+        return redirect()->route('user.dashboard');
 
 
     }

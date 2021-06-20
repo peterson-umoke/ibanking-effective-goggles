@@ -88,7 +88,9 @@
                         <ul class="list">
                             <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a>
                             </li>
-                            <li><a href="{{route('user.transfer.init')}}" target="_self"> Transfer </a></li>
+{{--                            <li><a href="{{route('user.transfer.init')}}" target="_self"> Transfer </a></li>--}}
+                            <li><a href="{{route('user.transfer.to.ownbank')}}" target="_self">
+                                    Domestic bank Transfer </a></li>
                             {{--                             <li><a href="{{route('user.deposit')}}" target="_self"> Deposit </a></li>--}}
                             {{--                            <li><a href="javascript:void(0);" target="_self"> Deposit </a></li>--}}
                             {{--                            <li><a href="javascript:void(0);" target="_self"> Withdraw </a></li>--}}
