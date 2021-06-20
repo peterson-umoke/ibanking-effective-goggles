@@ -80,7 +80,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return \App\User
+     * @return User|\App\User|\Illuminate\Database\Eloquent\Model
      */
     protected function create(array $data)
     {
