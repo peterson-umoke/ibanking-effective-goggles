@@ -17,11 +17,11 @@
                 <div class="tile">
                     <h3 class="tile-title"></h3>
                     <div class="text-center">
-                        @empty($data->avatar)
+                        @empty($data->photo)
                             <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
                                  class="avatar img-circle img-thumbnail" alt="avatar">
                         @else
-                            <img style="max-height: 250px;" src="{{asset('assets/image/avatar/'.$data->avatar)}}"
+                            <img style="max-height: 250px;" src="{{asset($data->photo)}}"
                                  class="avatar img-circle img-thumbnail" alt="avatar">
                         @endempty
                         <div class="col-md-12"><br>
@@ -135,7 +135,8 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="exampleInputEmail1">@lang('Reference Code')</label>
-                                <input class="form-control" type="text" name="reference_code" value="{{$data->reference_code}}">
+                                <input class="form-control" type="text" name="reference_code"
+                                       value="{{$data->reference_code}}">
                             </div>
                         </div>
 

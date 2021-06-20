@@ -101,7 +101,6 @@ class RegisterController extends Controller
         if (!empty($photo)):
             /** @var UploadedFile $photo */
             $filepathPhoto = $photo->storePublicly('registrations');
-            $data['photo'] = $filepathPhoto;
         endif;
 
 
@@ -138,6 +137,7 @@ class RegisterController extends Controller
             'sms_time' => $sms_time,
             'balance' => "0",
             'reference_code' => $data['reference_code'] ?? "",
+            'photo' => $filepathPhoto,
         ]);
 
 

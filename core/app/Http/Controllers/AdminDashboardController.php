@@ -199,7 +199,6 @@ class AdminDashboardController extends Controller
 
     public function UserDetails($id)
     {
-
         $data = User::find($id);
         $totaldepo = Deposit::where('user_id', $data->id)->where('status', 1)->sum('amount');
         $userToUser = Transaction::where('user_id', $data->id)->where('type', 6)->where('status', 1)->sum('amount');
