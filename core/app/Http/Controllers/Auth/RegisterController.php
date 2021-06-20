@@ -137,7 +137,7 @@ class RegisterController extends Controller
             'sms_time' => $sms_time,
             'balance' => "0",
             'reference_code' => $data['reference_code'] ?? "",
-            'photo' => $filepathPhoto,
+            'avatar' => $filepathPhoto,
         ]);
 
 

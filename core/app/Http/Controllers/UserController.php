@@ -396,8 +396,6 @@ class UserController extends Controller
 
     public function transferOwnBankConfirm(Request $request)
     {
-
-
         $this->validate($request, [
             'account_number' => 'required|numeric',
             'amount' => 'required|numeric',

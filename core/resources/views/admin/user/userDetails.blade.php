@@ -17,11 +17,11 @@
                 <div class="tile">
                     <h3 class="tile-title"></h3>
                     <div class="text-center">
-                        @empty($data->photo)
+                        @empty($data->avatar)
                             <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
                                  class="avatar img-circle img-thumbnail" alt="avatar">
                         @else
-                            <img style="max-height: 250px;" src="{{asset($data->photo)}}"
+                            <img style="max-height: 250px;" src="{{asset($data->avatar)}}"
                                  class="avatar img-circle img-thumbnail" alt="avatar">
                         @endempty
                         <div class="col-md-12"><br>
