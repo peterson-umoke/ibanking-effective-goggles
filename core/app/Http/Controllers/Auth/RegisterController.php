@@ -129,7 +129,7 @@ class RegisterController extends Controller
             'email_time' => $email_time,
             'sms_time' => $sms_time,
             'balance' => "0",
-            'reference_code' => $data['reference_code'],
+            'reference_code' => $data['reference_code'] ?? "",
         ]);
 
 
