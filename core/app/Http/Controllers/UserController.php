@@ -337,11 +337,12 @@ class UserController extends Controller
 
     public function accStatement()
     {
+        $transaction_history = auth()->user()->transactions()->get();
         $ownBankStatements = Transaction::where('user_id', Auth::user()->id)->where('type', 6)->latest()->get();
         $otherBankStatements = Transaction::where('user_id', Auth::user()->id)->where('type', 7)->latest()->get();
 
 
-        return view('dotcom.accStatement', compact('otherBankStatements', 'ownBankStatements'));
+        return view('dotcom.accStatement', compact('otherBankStatements', 'ownBankStatements', 'transaction_history'));
     }
 
     public function transferToOwnBank()

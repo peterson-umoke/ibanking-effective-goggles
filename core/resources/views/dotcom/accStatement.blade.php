@@ -14,7 +14,7 @@
             {{--                </a>--}}
             {{--            </li>--}}
             <li><a href="{{route('user.account.statement')}}" target="_self"> Transaction History </a></li>
-            <li><a href="{{route('user.account.statement')}}" target="_self"> Make a Transfer </a></li>
+            <li><a href="{{route('user.transfer.init')}}" target="_self"> Make a Transfer </a></li>
             {{-- <li data-wa-menu-3="Latest interim results"><a class=" "
                                                            href="{{route('user.deposit')}}">
                     E-Deposits
@@ -45,7 +45,7 @@
     <div class="content grid span-24 span-17--desk span-18--desk-wide grid--last"><!-- /*Start of E area*/ -->
         <header class="span-24 span-24--portable span-16--desk-wide" data-wa-region="E">
             <div data-compid="33-5088" data-wa-template="Page Data [E]" data-wa-component="Page Data"><h1
-                    id="content-start"> Account Statements </h1></div>
+                    id="content-start"> Transaction History </h1></div>
         </header><!-- /*End of E area*/ -->
         <section class="grid-group">
             <article class="grid span-24 span-24--portable span-16--desk-wide landmark" data-wa-region="C">
@@ -100,33 +100,94 @@
 {{--                        </table>--}}
 {{--                    </article>--}}
 
+{{--                    <article class="landmark">--}}
+{{--                        <header><h2><a href="javascript:void(0);"--}}
+{{--                                       target="_self"> Interbank Transfers </a></h2></header>--}}
+{{--                        <table class="table">--}}
+{{--                            <thead>--}}
+
+{{--                            <tr>--}}
+{{--                                <th class="text-center">@lang('Date')</th>--}}
+{{--                                <th class="text-center">@lang('Amount')</th>--}}
+{{--                                <th class="text-center">@lang('After balance')</th>--}}
+{{--                                <th class="text-center">@lang('Account info')</th>--}}
+{{--                                <th class="text-center">@lang('Processing time')</th>--}}
+{{--                                <th class="text-center">@lang('Status')</th>--}}
+{{--                            </tr>--}}
+{{--                            </thead>--}}
+{{--                            <tbody>--}}
+
+{{--                            @if(count($otherBankStatements) == 0)--}}
+{{--                                <tr>--}}
+{{--                                    <td colspan="6"><h2>@lang('No Data Available')</h2></td>--}}
+{{--                                </tr>--}}
+{{--                            @else--}}
+
+{{--                                @foreach($otherBankStatements as $data)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            {{$data->created_at}}--}}
+{{--                                        </td>--}}
+
+{{--                                        <td>--}}
+{{--                                            {{$data->amount}} {{$gnl->cur_symbol}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$data->balance}} {{$gnl->cur_symbol}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$data->details}}--}}
+{{--                                        </td>--}}
+
+{{--                                        <td>--}}
+{{--                                            {{$data->p_time}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            @if($data->status == 0) pending @elseif($data->status == 1)--}}
+{{--                                                Confirm @elseif($data->status == 3) Refund @endif--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
+{{--                    </article>--}}
+
                     <article class="landmark">
-                        <header><h2><a href="javascript:void(0);"
-                                       target="_self"> Interbank Transfers </a></h2></header>
+{{--                        <header><h2><a href="javascript:void(0);"--}}
+{{--                                       target="_self"> Transaction History </a></h2></header>--}}
                         <table class="table">
                             <thead>
 
                             <tr>
                                 <th class="text-center">@lang('Date')</th>
+                                <th class="text-center">@lang('Email')</th>
                                 <th class="text-center">@lang('Amount')</th>
-                                <th class="text-center">@lang('After balance')</th>
-                                <th class="text-center">@lang('Account info')</th>
-                                <th class="text-center">@lang('Processing time')</th>
-                                <th class="text-center">@lang('Status')</th>
+                                <th class="text-center">@lang('Balance')</th>
+{{--                                <th class="text-center">@lang('Fee')</th>--}}
+{{--                                <th class="text-center">@lang('Tranx Id')</th>--}}
+{{--                                <th class="text-center">@lang('Details')</th>--}}
+{{--                                <th class="text-center">@lang('Account info')</th>--}}
+{{--                                <th class="text-center">@lang('Processing time')</th>--}}
+{{--                                <th class="text-center">@lang('Status')</th>--}}
                             </tr>
                             </thead>
                             <tbody>
 
-                            @if(count($otherBankStatements) == 0)
+                            @if(count($transaction_history) == 0)
                                 <tr>
                                     <td colspan="6"><h2>@lang('No Data Available')</h2></td>
                                 </tr>
                             @else
 
-                                @foreach($otherBankStatements as $data)
+                                @foreach($transaction_history as $data)
                                     <tr>
                                         <td>
                                             {{$data->created_at}}
+                                        </td>
+
+                                        <td>
+                                            {{$data->user->email}}
                                         </td>
 
                                         <td>
@@ -135,17 +196,17 @@
                                         <td>
                                             {{$data->balance}} {{$gnl->cur_symbol}}
                                         </td>
-                                        <td>
-                                            {{$data->details}}
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            {{$data->details}}--}}
+{{--                                        </td>--}}
 
-                                        <td>
-                                            {{$data->p_time}}
-                                        </td>
-                                        <td>
-                                            @if($data->status == 0) pending @elseif($data->status == 1)
-                                                Confirm @elseif($data->status == 3) Refund @endif
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            {{$data->p_time}}--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            @if($data->status == 0) pending @elseif($data->status == 1)--}}
+{{--                                                Confirm @elseif($data->status == 3) Refund @endif--}}
+{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                             @endif
